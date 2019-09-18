@@ -1,6 +1,10 @@
-==========================================================
-Intrusion Detection Rule Embedded Metadata Schema (IDREMS)
-==========================================================
+=============
+BETTER Schema
+=============
+
+..................................................................
+(Better Enhanced Teleological and Taxonomic Embedded Rules Schema)
+..................................................................
 
 Summary
 =======
@@ -41,6 +45,9 @@ Contents
 -  `Authors <#authors>`__
 -  `Appendices <#appendices>`__
 
+   -  `Appendix A <#appendixa>`__
+   -  `Appendix B <#appendixb>`__
+
 Background
 ==========
 
@@ -48,12 +55,12 @@ Problem
 -------
 
 As network bandwidth increases, attack methodologies expand, malicious
-traffic patterns fluctuate, and IDS/IPS ruleset sizes grow, the ability
+traffic patterns fluctuate, and IDS ruleset sizes grow, the ability
 to programmatically understand the taxonomic and teleological
-characteristics of each IDS/IPS rule becomes invaluable. The decades-old
-practice of maintaining a rigid classification.config file and
+characteristics of each IDS rule becomes invaluable. The decades-old
+practices of maintaining a rigid classification.config file and
 segregating rules into distinct files is onerous, not scalable, and, in
-many deployments, inviable for those wishing to tune their rulesets.
+many deployments, inviable for accurate ruleset tuning.
 Simply enabling all available IDS rules is rarely wise, prudent, or
 feasible for those concerned about rule performance, false-positives,
 volume, and value. There needs to be an easy way to "slice and dice"
@@ -77,7 +84,7 @@ This document defines version 1.0, released October 2019.
 Scope
 -----
 
-While the remainder of this document focuses on the “metadata” keyword
+While the remainder of this document focuses on the ``metadata`` keyword
 supported by the `Suricata <https://suricata-ids.org/>`__ and
 `Snort <https://www.snort.org/>`__ IDS engines, its applicability
 should not be considered restricted to just those technologies, but can
@@ -87,54 +94,53 @@ capabilities.
 Overview
 --------
 
-Non-functional (in terms of detection) information in Suricata and
-Suricata rules can be provided in the metadata keyword which allows for
-arbitrary data to be included within a rule. The contents of the
-metadata keyword can be structured as key-value pairs. Other IDS rules
+The `Suricata metadata
+keyword <https://suricata.readthedocs.io/en/latest/rules/meta.html?highlight=metadata#metadata>`__
+and `Snort metadata
+keyword <http://manual-snort-org.s3-website-us-east-1.amazonaws.com/node31.html#SECTION00448000000000000000>`__
+allow for non-functional (in terms of detection) information to be
+included (embedded) within a rule. The contents of the
+``metadata`` keyword can be structured as key-value pairs. Other IDS rules
 may support similar functionality.
 
-`Suricata Metadata
-Keyword <https://suricata.readthedocs.io/en/latest/rules/meta.html?highlight=metadata#metadata>`__
-
-`Snort Metadata
-Keyword <http://manual-snort-org.s3-website-us-east-1.amazonaws.com/node31.html#SECTION00448000000000000000>`__
 
 Details
 -------
 
-This schema defines a key-value pair structure in the metadata keyword
-in Suricata and Snort rules. The key-value pairs within the value of the
-metadata keyword are defined as comma separated, with a space separating
+This schema defines a key-value pair structure in the ``metadata`` keyword
+for Suricata and Snort rules. The key-value pairs within the value of the
+``metadata`` keyword are defined as comma separated, with a space separating
 the key and value, and the key being the first word.
 
-Regarding the metadata keyword values:
+Regarding the ``metadata`` keyword values:
 
--  key names and values are case insensitive and should be interpreted
+-  Key names and values are case insensitive and should be interpreted
    as such.
--  key names and values should only contain printable ASCII characters.
--  key names and values should be separated by a single space (ASCII
+-  Key names and values should only contain printable ASCII characters.
+-  Key names and values should be separated by a single space (ASCII
    0x20).
--  key names should only contain alphanumeric characters (A-Z, a-z, 0-9)
-   and underscore ('\_'), and should not start with a number.
--  key values must not contain commas (',') or semicolons (';') but may
+-  Whitespace before or after key names and key values should be ignored.
+-  Key names should only contain alphanumeric characters (A-Z, a-z, 0-9)
+   and underscore ('\_'); and should not start with a number.
+-  Key values must not contain commas (',') or semicolons (';') but may
    include spaces (' '), dashes ('-'), etc.
--  key values must not begin with '<' (ASCII 0x3C) or '>' (ASCII 0x3E).
--  The key name 'sid' is reserved and should not be used unless the
-   value of the key is the same as that of the “sid” keyword in the
+-  Key values must not begin with '<' (ASCII 0x3C) or '>' (ASCII 0x3E).
+-  The key name "sid" is reserved and should not be used unless the
+   value of the key is the same as that of the ``sid`` keyword in the
    rule.
--  characters, character locations, character combinations, etc. that
-   are not supported by the IDS engine as values to the metadata keyword
+-  Characters, character locations, character combinations, etc. that
+   are not supported by the IDS engine as values to the ``metadata`` keyword
    are implicitly not allowed.
 
 A rules file should designate what schema and version its containing
 rules support. This should be specified in the file before any rules are
 specified, using the format:
 
-``<comment_character(s)>idrems-schema<space><version>``
+``<comment_character(s)>better-schema<space><version>``
 
 Example:
 
-``#idrems-schema 1.0``
+``#better-schema 1.0``
 
 Keys and Values
 ---------------
@@ -161,9 +167,9 @@ Defined keys:
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | dhcp               | There is no distinction of type, function, layer, etc.                                                                                                                                                                   |
 |                        |                    |                                                                                                                                                                                                                          |
-|                        | dns                | Since it is generally assumed in this application, Internet Protocol (IP) is not included unless it is specified in the rule (e.g. “alert ip ....”)                                                                      |
+|                        | dns                | Since it is generally assumed in this application, Internet Protocol (IP) is not included unless it is specified in the rule (e.g. "alert ip ....")                                                                      |
 |                        |                    |                                                                                                                                                                                                                          |
-|                        | ftp                | The protocol “tls” includes SSL; there should not be a bifurcation having SSL and TLS.                                                                                                                                   |
+|                        | ftp                | The protocol "tls" includes SSL; there should not be a bifurcation having SSL and TLS.                                                                                                                                   |
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | http               |                                                                                                                                                                                                                          |
 |                        |                    |                                                                                                                                                                                                                          |
@@ -203,9 +209,9 @@ Defined keys:
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | vnc                |                                                                                                                                                                                                                          |
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **attack\_target**     | http-server        | Defines what type asset is protected by this rule. Typically in the format of “<protocol>-server” or “<protocol>-client”, with <protocol> not including layer 4 and below. One notable exception is “database-server”.   |
+| **attack\_target**     | http-server        | Defines what type asset is protected by this rule. Typically in the format of "<protocol>-server" or "<protocol>-client", with <protocol> not including layer 4 and below. One notable exception is "database-server".   |
 |                        |                    |                                                                                                                                                                                                                          |
-|                        | http-client        | “tls” includes SSL. Note that “tls-server” and “http-server” are distinct (same for “-client”).                                                                                                                          |
+|                        | http-client        | "tls" includes SSL. Note that "tls-server" and "http-server" are distinct (same for "-client").                                                                                                                          |
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | ftp-server         |                                                                                                                                                                                                                          |
 |                        |                    |                                                                                                                                                                                                                          |
@@ -241,9 +247,9 @@ Defined keys:
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | 119                | `https://cwe.mitre.org <https://cwe.mitre.org/>`__\ `/ <https://cwe.mitre.org/>`__                                                                                                                                       |
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **malware**            | malware            | If a rule detects on malware traffic, it should have a *malware* key instead of *capec\_id*. It should also have a malware related *cwe\_id.*                                                                            |
+| **malware**            | malware            | If a rule detects on malware traffic, it should have a ``malware`` key (it may also have a malware related ``cwe_id`` and/or ``capec_id`` key).                                                                          |
 |                        |                    |                                                                                                                                                                                                                          |
-|                        | post-infection     | This is not designed to label specific malware or malware families, but to identify the rule as malware related and communicate broad malware function. See Appendix A for details on possible values.                   |
+|                        | post-infection     | This is not designed to label specific malware or malware families, but to identify the rule as malware related and communicate broad malware function. See `Appendix A <#appendixa>`__ for details on possible values.  |
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | pre-infection      |                                                                                                                                                                                                                          |
 |                        |                    |                                                                                                                                                                                                                          |
@@ -251,7 +257,7 @@ Defined keys:
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **cve**                | 2015-0235          | CVE number related to this rule.                                                                                                                                                                                         |
 |                        |                    |                                                                                                                                                                                                                          |
-|                        | 2019-10149         | Value does not include leading “CVE-” and maintains the dash ('-') between the year and sequence number.                                                                                                                 |
+|                        | 2019-10149         | Value does not include leading "CVE-" and maintains the dash ('-') between the year and sequence number.                                                                                                                 |
 |                        |                    |                                                                                                                                                                                                                          |
 |                        |                    | https://cve.mitre.org/                                                                                                                                                                                                   |
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -265,7 +271,7 @@ Defined keys:
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **cvss\_v3\_base**     | 8.1                | CVSS version 3.x base score for the vulnerability related to this rule.                                                                                                                                                  |
 |                        |                    |                                                                                                                                                                                                                          |
-|                        | 7.8                | There                                                                                                                                                                                                                    |
+|                        | 7.8                | There is no differentiation of minor versions of CVSS v3 (e.g. 3.0 vs 3.1).                                                                                                                                              |
 |                        |                    |                                                                                                                                                                                                                          |
 |                        |                    | https://www.first.org/cvss/v3.0/specification-document#2-Base-Metrics                                                                                                                                                    |
 |                        |                    |                                                                                                                                                                                                                          |
@@ -273,13 +279,15 @@ Defined keys:
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **cvss\_v3\_temporal** | 7.7                | CVSS version 3.x temporal score for the vulnerability related to this rule.                                                                                                                                              |
 |                        |                    |                                                                                                                                                                                                                          |
-|                        | 7.0                | https://www.first.org/cvss/v3.0/specification-document#3-Temporal-Metrics                                                                                                                                                |
+|                        | 7.9                | There is no differentiation of minor versions of CVSS v3 (e.g. 3.0 vs 3.1).                                                                                                                                              |
+|                        |                    |                                                                                                                                                                                                                          |
+|                        |                    | https://www.first.org/cvss/v3.0/specification-document#3-Temporal-Metrics                                                                                                                                                |
 |                        |                    |                                                                                                                                                                                                                          |
 |                        |                    | https://www.first.org/cvss/v3.1/specification-document#Temporal-Metrics                                                                                                                                                  |
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **priority**           | high               | For Suricata and Snort, this corresponds directly with “priority” keyword in the rule: high = 1; medium = 2; low = 3; info = 4; research = 5.                                                                            |
+| **priority**           | high               | For Suricata and Snort, this corresponds directly with "priority" keyword in the rule: high = 1; medium = 2; low = 3; info = 4; research = 5.                                                                            |
 |                        |                    |                                                                                                                                                                                                                          |
-|                        | medium             | See Appendix B for details.                                                                                                                                                                                              |
+|                        | medium             | See `Appendix B <#appendixb>`__ for details.                                                                                                                                                                             |
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | low                |                                                                                                                                                                                                                          |
 |                        |                    |                                                                                                                                                                                                                          |
@@ -287,9 +295,9 @@ Defined keys:
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | research           |                                                                                                                                                                                                                          |
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **hostile**            | src\_ip            | Which side of the alert is considered “hostile” (i.e. attacker, C2, etc.)                                                                                                                                                |
+| **hostile**            | src\_ip            | Which side of the alert is considered "hostile" (i.e. attacker, C2, etc.)                                                                                                                                                |
 |                        |                    |                                                                                                                                                                                                                          |
-|                        | dest\_ip           | This is the inverse of the “target” Suricata rule keyword (https://suricata.readthedocs.io/en/suricata-4.1.4/rules/meta.html#target).                                                                                    |
+|                        | dest\_ip           | This is the inverse of the "target" Suricata rule keyword (https://suricata.readthedocs.io/en/suricata-4.1.4/rules/meta.html#target).                                                                                    |
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **infected**           | src\_ip            | Which side of the alert is the malware-infected host. Should only be present on malware-related rules.                                                                                                                   |
 |                        |                    |                                                                                                                                                                                                                          |
@@ -307,7 +315,7 @@ Defined keys:
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | adware.rules       |                                                                                                                                                                                                                          |
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **classtype**          | trojan-activity    | Same as what is/would be found in the “classtype” rule keyword; defined to help provide legacy compatibility mapping.                                                                                                    |
+| **classtype**          | trojan-activity    | Same as what is/would be found in the ``classtype`` rule keyword. Defined to help provide legacy compatibility mapping.                                                                                                  |
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | shellcode-detect   | https://suricata.readthedocs.io/en/latest/rules/meta.html?highlight=classification%20keyword#classtype                                                                                                                   |
 |                        |                    |                                                                                                                                                                                                                          |
@@ -317,7 +325,7 @@ Defined keys:
 |                        |                    |                                                                                                                                                                                                                          |
 |                        | emerging-threats   |                                                                                                                                                                                                                          |
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **sid**                | 8675309            | If used, the value of the key must be the same as that of the “sid” keyword in the rule and since this is redundant, the use of the “sid” key is not recommended.                                                        |
+| **sid**                | 8675309            | If used, the value of the key must be the same as that of the ``sid`` keyword in the rule and since this is redundant, the use of the "sid" key is not recommended.                                                      |
 +------------------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The values shown for the ``priority``, ``hostile``, and ``infected`` keys are the complete list for those keys.
@@ -327,13 +335,15 @@ Examples
 ========
 
 These examples help illustrate the concepts discussed in this document.
-Also, the structures in the Suricata EVE JSON log snippets show how the
+Also, the structures in the `Suricata EVE
+JSON <https://suricata.readthedocs.io/en/latest/output/eve/eve-json-output.html>`__ log
+snippets show how the
 metadata key-value pairs should be logically interpreted.
 
 Example 1
 ---------
 
-This metadata keyword in a rule:
+This ``metadata`` keyword in a rule:
 
 ::
 
@@ -344,7 +354,7 @@ This metadata keyword in a rule:
 
 Results in this in the Suricata EVE JSON log:
 
-::
+.. code:: json
 
   "metadata": {
     "protocols": [
@@ -403,7 +413,7 @@ Results in this in the Suricata EVE JSON log:
 Example 2
 ---------
 
-This metadata keyword in a rule:
+This ``metadata`` keyword in a rule:
 
 ::
 
@@ -413,7 +423,7 @@ This metadata keyword in a rule:
 
 Results in this in the Suricata EVE JSON log:
 
-::
+.. code:: json
 
   "metadata": {
     "protocols": [
@@ -475,6 +485,8 @@ Authors
 Appendices
 ==========
 
+.. _AppendixA:
+
 Appendix A - ``malware`` metadata key value details
 ---------------------------------------------------
 
@@ -490,6 +502,7 @@ Appendix A - ``malware`` metadata key value details
 | download-attempt   | Malware download attempt; pre-persistence    |
 +--------------------+----------------------------------------------+
 
+.. _AppendixB:
 
 Appendix B - ``priority`` metadata key value details
 -----------------------------------------------------
