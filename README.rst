@@ -5,11 +5,11 @@ Intrusion Detection Rule Embedded Metadata Schema (IDREMS)
 Summary
 =======
 
-This document defines a standard schema to use metadata key-value pairs
-in rules for intrusion detection systems (IDS) such as
-`Suricata <https://suricata-ids.org/>`__ and
-`Snort <https://www.snort.org/>`__ to embed teleological and taxonomic
-information.
+This document defines a schema and standard for embedding metadata
+in intrusion detetection system (IDS) rules.  The discussed metadata
+is composed as key-value pairs and is primarily intended to
+communicate teleological and taxonomic information about the rule
+in which it resides.
 
 Contents
 ========
@@ -78,7 +78,8 @@ Scope
 -----
 
 While the remainder of this document focuses on the “metadata” keyword
-supported by the Suricata and Snort IDS engines, its applicability
+supported by the `Suricata <https://suricata-ids.org/>`__ and
+`Snort <https://www.snort.org/>`__ IDS engines, its applicability
 should not be considered restricted to just those technologies, but can
 apply to rules for other IDS engines if they support similar
 capabilities.
