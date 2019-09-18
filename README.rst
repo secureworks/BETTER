@@ -2,9 +2,6 @@
 Intrusion Detection Rule Embedded Metadata Schema (IDREMS)
 ==========================================================
 
-(IDREMS)
-========
-
 Summary
 =======
 
@@ -30,7 +27,7 @@ Contents
    -  `Details <#details>`__
    -  `Keys and Values <#keys-and-values>`__
 
-     -  `Defined KeysDetails <#defined-keys>`__
+      -  `Defined Keys <#defined-keys>`__
 
 -  `Examples <#examples>`__
 
