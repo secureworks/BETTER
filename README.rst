@@ -10,7 +10,7 @@ Summary
 =======
 
 This document defines a schema and standard for embedding metadata
-in intrusion detetection system (IDS) rules.  The discussed metadata
+in intrusion detection system (IDS) rules.  The discussed metadata
 is composed as key-value pairs and is primarily intended to
 communicate teleological and taxonomic information about the rule
 in which it resides.
