@@ -122,8 +122,8 @@ Regarding the ``metadata`` keyword values:
 -  Whitespace before or after key names and key values should be ignored.
 -  Key names should only contain alphanumeric characters (A-Z, a-z, 0-9)
    and underscore ('\_'); and should not start with a number.
--  Key values must not contain commas (',') or semicolons (';') but may
-   include spaces (' '), dashes ('-'), etc.
+-  Key values must not contain commas (','), semicolons (';'), or
+   double quotes ('"'), but may include spaces (' '), dashes ('-'), etc.
 -  Key values must not begin with '<' (ASCII 0x3C) or '>' (ASCII 0x3E).
 -  The key name "sid" is reserved and should not be used unless the
    value of the key is the same as that of the ``sid`` keyword in the
