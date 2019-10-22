@@ -251,6 +251,8 @@ Defined keys
        There is no differentiation of minor versions of CVSS v3 (e.g. 3.0 vs 3.1).
 
        `<https://www.first.org/cvss/v3.0/specification-document#2-Base-Metrics>`__
+
+       `<https://www.first.org/cvss/v3.1/specification-document#Base-Metrics>'__
    * - **cvss_v3_temporal**
      - 7.7
 
