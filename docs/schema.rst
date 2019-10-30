@@ -252,7 +252,7 @@ Defined keys
 
        `<https://www.first.org/cvss/v3.0/specification-document#2-Base-Metrics>`__
 
-       `<https://www.first.org/cvss/v3.1/specification-document#Base-Metrics>'__
+       `<https://www.first.org/cvss/v3.1/specification-document#Base-Metrics>`__
    * - **cvss_v3_temporal**
      - 7.7
 
