@@ -140,13 +140,13 @@ Defined keys
        udp
 
        vnc
-     - Protocol(s) the rule is attempting to inspect.
+     - **Protocol(s) the rule is attempting to inspect.**
 
        There is no distinction of type, function, layer, etc.
 
-       Since it is generally assumed in this context, Internet Protocol (IP) is not included unless it is specified in the rule (e.g. ``alert ip ...``)
+       Since it is generally assumed in this context, Internet Protocol (IP) is typically not included unless it is specified in the rule (e.g. ``alert ip ...``)
 
-       The protocol “tls” includes SSL; there should not be a bifurcation having SSL and TLS.
+       It is recommended that the protocol “TLS” include SSL and there not be a bifurcation having SSL and TLS.
    * - **attack_target**
      - http-server
 
@@ -165,13 +165,11 @@ Defined keys
        client
 
        server
-     - Defines what type asset is protected by this rule.
-       Typically in the format of ``<protocol>-server`` or ``<protocol>-client``,
-       with <protocol> not including layer 4 and below. One notable exception
-       is ``database-server``.
+     - **Defines what type asset is protected by this rule.**
 
-       ``tls`` includes SSL. Note that ``tls-server`` and ``http-server``
-       are distinct (same for ``tls-client`` and ``tls-server``).
+       Suggested values follow the format of ``<protocol>-server`` or ``<protocol>-client``,
+       with <protocol> not including layer 4 and below, and common deviations including
+       values like ``database-server``.
    * - **mitre_attack**
      - T1100
 
@@ -180,7 +178,7 @@ Defined keys
        T1018
 
        T1046
-     - MITRE ATT&CK Framework ID
+     - **MITRE ATT&CK Framework ID**
 
        `<https://attack.mitre.org/>`__
    * - **capec_id**
@@ -189,7 +187,7 @@ Defined keys
        210
 
        255
-     - CAPEC ID number related to this rule.
+     - **CAPEC ID number** related to this rule.
 
        Only the integer value is used for key value.
 
@@ -200,7 +198,7 @@ Defined keys
        506
 
        119
-     - CWE ID number related to this rule.
+     - **CWE ID number** related to this rule.
 
        Only the integer value is used for key value.
 
@@ -213,8 +211,8 @@ Defined keys
        pre-infection
 
        download-attempt
-     - If a rule detects on malware traffic, it should have a ``malware``
-       key (it may also have a malware related ``cwe_id`` and/or ``capec_id`` key).
+     - **If a rule detects on malware traffic**, it should have a ``malware`` key
+       (it may also have a malware related ``cwe_id`` and/or ``capec_id`` key).
 
        This is not designed to label specific malware or malware families, but
        to identify the rule as malware related and communicate broad malware
@@ -223,7 +221,7 @@ Defined keys
      - 2015-0235
 
        2019-10149
-     - CVE number related to this rule.
+     - **CVE number** related to this rule.
 
        Value does not include leading “CVE-” and maintains the dash (‘-‘) between the year and sequence number.
 
@@ -232,21 +230,21 @@ Defined keys
      - 7.5
 
        10.0
-     - CVSS version 2 base score for the vulnerability related to this rule.
+     - **CVSS version 2 base score** for the vulnerability related to this rule.
 
        `<https://www.first.org/cvss/v2/guide#2-1-Base-Metrics>`__
    * - **cvss_v2_temporal**
      - 6.2
 
        8.7
-     - CVSS version 2 temporal score for the vulnerability related to this rule.
+     - **CVSS version 2 temporal score** for the vulnerability related to this rule.
 
        `<https://www.first.org/cvss/v2/guide#2-2-Temporal-Metrics>`__
    * - **cvss_v3_base**
      - 8.1
 
        7.8
-     - CVSS version 3.x base score for the vulnerability related to this rule.
+     - **CVSS version 3.x base score** for the vulnerability related to this rule.
 
        There is no differentiation of minor versions of CVSS v3 (e.g. 3.0 vs 3.1).
 
@@ -257,7 +255,7 @@ Defined keys
      - 7.7
 
        7.9
-     - CVSS version 3.x temporal score for the vulnerability related to this rule.
+     - **CVSS version 3.x temporal score** for the vulnerability related to this rule.
 
        There is no differentiation of minor versions of CVSS v3 (e.g. 3.0 vs 3.1).
 
@@ -274,14 +272,15 @@ Defined keys
        info
 
        research
-     - For Suricata and Snort, this corresponds directly with “priority” keyword in the rule: high = 1; medium = 2; low = 3; info = 4; research = 5.
+     - **Alert priority**; similar to the Suricata and Snort ``priority`` keyword but normalized
+       one of five, finite and unambiguous string values.
 
-       See :ref:`appendixb` for details.
+       See also :ref:`appendixb`.
    * - **hostile**
      - src_ip
 
        dest_ip
-     - Which side of the alert is considered “hostile” (i.e. attacker, C2, etc.)
+     - **Which side of the alert is considered “hostile”** (i.e. attacker, C2, etc.)
 
        This is the inverse of the “target” Suricata rule
        keyword (`<https://suricata.readthedocs.io/en/suricata-4.1.4/rules/meta.html#target>`__).
@@ -289,22 +288,24 @@ Defined keys
      - src_ip
 
        dest_ip
-     - Which side of the alert is the malware-infected host. Should only be present on malware-related rules.
+     - **Which side of the alert is the malware-infected host.** Should only be present on malware-related rules.
    * - **created_at**
      - 2019-07-19
 
        2017-10-31
-     - Date the rule was created. Format is YYYY-MM-DD.
+     - **Date the rule was created.** Format is YYYY-MM-DD
+       (`ISO 8601 <https://www.iso.org/iso-8601-date-and-time-format.html>`__).
    * - **updated_at**
      - 2019-04-02
 
        2018-12-07
-     - Date the rule was last updated. Format is YYYY-MM-DD.
+     - **Date the rule was last updated.** Format is YYYY-MM-DD
+       (`ISO 8601 <https://www.iso.org/iso-8601-date-and-time-format.html>`__).
    * - **filename**
      - sw.rules
 
        adware.rules
-     - If the ruleset was split into files, this would be the corresponding filename.
+     - **If the ruleset was split into files, this would be the corresponding filename.**
        Defined to help provide legacy compatibility mapping.
    * - **classtype**
      - trojan-activity
@@ -312,7 +313,7 @@ Defined keys
        shellcode-detect
 
        policy-violation
-     - Same as what is/would be found in the ``classtype`` rule keyword. Defined to help provide legacy compatibility mapping.
+     - **Same as what is/would be found in the 'classtype' rule keyword.** Defined to help provide legacy compatibility mapping.
 
        `<https://suricata.readthedocs.io/en/latest/rules/meta.html?highlight=classification%20keyword#classtype>`__
 
@@ -321,10 +322,10 @@ Defined keys
      - secureworks
 
        emerging-threats
-     - Vendor name or other identifier to label the source, author, and/or curator of the rule.
+     - **Vendor name or other identifier** to label the source, author, and/or curator of the rule.
    * - **sid**
      - 8675309
-     - If used, the value of the key must be the same as that of the ``sid`` keyword in the
+     - If used, the value of the key must be the **same as that of the 'sid' keyword** in the
        rule and since this is redundant, the use of the “sid” key is not recommended.
 
 .. note::
